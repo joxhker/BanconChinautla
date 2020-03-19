@@ -14,10 +14,10 @@ namespace BanconChinautla.Controllers
     {
         private readonly IBancoRepository _repo;
 
-        public HomeController(IBancoRepository repo)
-        {
-            _repo = repo;
-        }
+        //public HomeController(IBancoRepository repo)
+        //{
+        //    _repo = repo;
+        //}
 
         public IActionResult Index()
         {
