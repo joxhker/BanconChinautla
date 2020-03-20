@@ -7,7 +7,7 @@ namespace BanconChinautla.Repository
 {
     public interface IBancoRepository
     {
-        void Add();
+        bool CrearCuenta();
         void Update();
         void Delete();
     }

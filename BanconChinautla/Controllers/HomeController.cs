@@ -21,7 +21,8 @@ namespace BanconChinautla.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vm = new CuentaVM();
+            return View(vm);
         }
 
         public IActionResult Privacy()
