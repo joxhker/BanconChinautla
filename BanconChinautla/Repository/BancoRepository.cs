@@ -53,7 +53,7 @@ namespace BanconChinautla.Repository
             using (OracleCommand cmd = cp.CreateCommand())
             {
                 cp.Open();
-                cmd.CommandText = "SELECT TO_CHAR(C.COD_CAJA), TO_CHAR(C.COD_AGENCIA), TO_CHAR(C.NO_CAJA) , TO_CHAR(C.STATUS) , A.NOMBRE, TO_CHAR(A.STATUS) FROM TB_CAJA C  LEFT JOIN TB_AGENCIA A ON C.COD_AGENCIA = A.COD_AGENCIA ORDER BY C.COD_CAJA,A.COD_AGENCIA";
+                cmd.CommandText = "SELECT TO_CHAR(C.COD_CAJA), TO_CHAR(C.COD_AGENCIA), TO_CHAR(C.NO_CAJA) , CASE WHEN C.STATUS = 'A' THEN 'ALTA' ELSE 'BAJA' END A , A.NOMBRE, CASE WHEN A.STATUS = 'A' THEN 'ALTA' ELSE 'BAJA' END B FROM TB_CAJA C  LEFT JOIN TB_AGENCIA A ON C.COD_AGENCIA = A.COD_AGENCIA ORDER BY C.COD_CAJA,A.COD_AGENCIA";
                 OracleDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
