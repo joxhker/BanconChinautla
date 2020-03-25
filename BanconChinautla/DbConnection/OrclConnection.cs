@@ -15,9 +15,9 @@ namespace BanconChinautla.DbConnection
                 String connString = "Pooling=false;User Id=PROYECTOFINAL_DEV;Password=PROYECTOFINAL_DEV;Data Source=localhost:1521/DBMANAGERS;";
                 return new OracleConnection(connString);
             }
-            catch (Exception ep)
+            catch (Exception e)
             {
-
+                e.Message.ToString();
             }
             return null;
         }

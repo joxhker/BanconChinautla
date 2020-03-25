@@ -1,4 +1,6 @@
 ﻿using BanconChinautla.DbConnection;
+using BanconChinautla.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,7 @@ namespace BanconChinautla.Repository
         //<hostname or IP address>:<listener port>/<database service name>
         //ConnectionString completo de ejemplo: User Id=hr;Password=<password>;Data Source=localhost:1521/orcl
 
-        const string connectionString = "ORACLE connectionString here";
-        private OracleConnection _conexion;
-
-        BancoRepository()
-        {
-            
-        }
+        const string connectionString = "Pooling=false;User Id=PROYECTOFINAL_DEV;Password=PROYECTOFINAL_DEV;Data Source=localhost:1521/DBMANAGERS;";
 
         public bool CrearCuenta()
         {
@@ -33,6 +29,45 @@ namespace BanconChinautla.Repository
 
             //Retornar si fue exitoso o no... si se desea mensaje de excepción, retornar un string
             return true;
+        }
+
+        public int CrearCaja()
+        {
+            var queryString = "";
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                OracleCommand command = new OracleCommand(queryString, connection);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+
+            //Retornar si fue exitoso o no... si se desea mensaje de excepción, retornar un string
+            return 1;
+        }
+
+        public List<CajaVM> ListCaja()
+        {
+            List<CajaVM> p = new List<CajaVM>();
+            OracleConnection cp = new OracleConnection(connectionString);
+            if (cp == null) { return p; }
+            using (OracleCommand cmd = cp.CreateCommand())
+            {
+                cp.Open();
+                cmd.CommandText = "SELECT TO_CHAR(C.COD_CAJA), TO_CHAR(C.COD_AGENCIA), TO_CHAR(C.NO_CAJA) , TO_CHAR(C.STATUS) , A.NOMBRE, TO_CHAR(A.STATUS) FROM TB_CAJA C  LEFT JOIN TB_AGENCIA A ON C.COD_AGENCIA = A.COD_AGENCIA ORDER BY C.COD_CAJA,A.COD_AGENCIA";
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CajaVM item = new CajaVM();
+                    item.codCaja = reader.GetString(0);
+                    item.codAgencia = reader.GetString(1);
+                    item.noCaja = reader.GetString(2);
+                    item.status = reader.GetString(3);
+                    item.nombreAgencia = reader.GetString(4);
+                    item.statusAgencia = reader.GetString(5);
+                    p.Add(item);
+                }
+            }
+            return p;
         }
 
         public void Delete()

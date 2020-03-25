@@ -1,0 +1,45 @@
+﻿@model List<CajaVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cajas</h1>
+<br />
+<a href="/Caja/New">
+    <button type="button" class="btn btn-success">Agregar Caja</button>
+</a>
+
+
+<hr />
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Codigo Caja</th>
+            <th scope="col">Numero Caja</th>
+            <th scope="col">Estado Caja</th>
+            <th scope="col">Agencia</th>
+            <th scope="col">Estado Agencia</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.codCaja)</td>
+                <td>@Html.DisplayFor(modelItem => item.noCaja)</td>
+                <td>@Html.DisplayFor(modelItem => item.status)</td>
+                <td>@Html.DisplayFor(modelItem => item.nombreAgencia)</td>
+                <td>@Html.DisplayFor(modelItem => item.statusAgencia)</td>
+                <td>
+                    <a href="#">
+                        <button type="button" class="btn btn-info"><i class="fas fa-edit"></i></button>
+                    </a>
+                    <a href="#">
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
