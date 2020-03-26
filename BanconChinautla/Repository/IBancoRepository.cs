@@ -14,5 +14,8 @@ namespace BanconChinautla.Repository
         void Update();
         void Delete();
         List<CajaVM> ListCaja();
+        List<SelectListItem> selectAgencias(); 
+        int EliminarCaja(int cod_caja,int token); 
+        int CrearCaja(int cod_agencia, int no_caja, int token);
     }
 }

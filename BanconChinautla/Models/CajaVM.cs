@@ -15,6 +15,6 @@ namespace BanconChinautla.Models
         public String status { get; set; }
         public String nombreAgencia { get; set; }
         public String statusAgencia { get; set; }
-
+        public List<SelectListItem> Agencias { get; set; }
     }
 }

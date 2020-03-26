@@ -70,6 +70,69 @@ namespace BanconChinautla.Repository
             return p;
         }
 
+        public List<SelectListItem> selectAgencias()
+        {
+            List<SelectListItem> send = new List<SelectListItem>();
+            OracleConnection cp = new OracleConnection(connectionString);
+            if (cp == null) { return send; }
+            using (OracleCommand cmd = cp.CreateCommand())
+            {
+                cp.Open();
+                cmd.CommandText = "SELECT COD_AGENCIA, NOMBRE ||', '||DIRECCION ZONA FROM TB_AGENCIA WHERE STATUS = 'A'";
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    SelectListItem item = new SelectListItem
+                    {
+                        Text = reader.GetString(1),
+                        Value = reader.GetInt32(0).ToString()
+                    };
+                    send.Add(item);
+                }
+            }
+            return send;
+        }
+
+
+        public int EliminarCaja(int cod_caja, int token)
+        {
+            int result = 0;
+            OracleConnection cp = new OracleConnection(connectionString);
+            if (cp == null) { return -500; }
+            using (OracleCommand cmd = cp.CreateCommand())
+            {
+                cp.Open();
+                cmd.CommandText = "SELECT FN_BAJA_CAJA("+cod_caja+", "+token+") valor from dual";
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result = reader.GetInt32(0);
+                }
+            }
+            return result;
+        }
+
+        public int CrearCaja(int cod_agencia, int no_caja, int token)
+        {
+            int result = 0;
+            OracleConnection cp = new OracleConnection(connectionString);
+            if (cp == null) { return -500; }
+            using (OracleCommand cmd = cp.CreateCommand())
+            {
+                cp.Open();
+                cmd.CommandText = "select FN_CREAR_CAJA("+cod_agencia+ ", "+ no_caja + ", "+ token + ") info from dual";
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result = reader.GetInt32(0);
+                }
+            }
+            return result;
+        }
+
+        
+
+
         public void Delete()
         {
             throw new NotImplementedException();
@@ -79,5 +142,7 @@ namespace BanconChinautla.Repository
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

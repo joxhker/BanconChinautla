@@ -5,7 +5,7 @@
 
 <h1>Cajas</h1>
 <br />
-<a href="/Caja/New">
+<a href="/Caja/Create">
     <button type="button" class="btn btn-success">Agregar Caja</button>
 </a>
 
@@ -26,16 +26,13 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td> @Html.DisplayFor(modelItem => item.codCaja)</td>
+                <td>@Html.DisplayFor(modelItem => item.codCaja)</td>
                 <td>@Html.DisplayFor(modelItem => item.noCaja)</td>
                 <td>@Html.DisplayFor(modelItem => item.status)</td>
                 <td>@Html.DisplayFor(modelItem => item.nombreAgencia)</td>
                 <td>@Html.DisplayFor(modelItem => item.statusAgencia)</td>
                 <td>
-                    <a href="#">
-                        <button type="button" class="btn btn-info"><i class="fas fa-edit"></i></button>
-                    </a>
-                    <a href="#">
+                    <a href="Caja/Delete/@Html.DisplayFor(modelItem => item.codCaja)/5000">
                         <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     </a>
                 </td>

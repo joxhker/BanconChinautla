@@ -1,0 +1,33 @@
+﻿@model BanconChinautla.Models.CajaVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+ 
+<h4>Creacion de Caja</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="New" method="post">
+            <div class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="noCaja" class="control-label">Numero de caja:</label>
+                <input asp-for="noCaja" class="form-control" />
+                <span asp-validation-for="noCaja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Agencia:</label>
+                <br />
+                @Html.DropDownListFor(x => x.codAgencia, Model.Agencias, "Seleccione")
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>

@@ -1,0 +1,12 @@
+﻿@model CajaVM
+@{
+    ViewData["Title"] = "New";
+}
+ 
+  
+<div class="jumbotron">
+    <h1 class="display-4">Caja # @Model.noCaja</h1>
+    <p class="lead">@Model.status - Codigo de agencia: @Model.codAgencia</p>
+    <hr class="my-4"> 
+    <a class="btn btn-primary btn-lg" asp-action="Index" role="button">Regresar</a>
+</div>
